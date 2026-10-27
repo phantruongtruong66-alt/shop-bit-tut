@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop Bít Tút – Thú Nhồi Bông</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --pink:       #f472b6;
+      --pink-light: #fce7f3;
+      --pink-deep:  #ec4899;
+      --pink-dark:  #be185d;
+      --cream:      #fff0f6;
+      --brown:      #7c3f2c;
+      --white:      #ffffff;
+      --gray:       #6b7280;
+      --shadow:     0 4px 24px rgba(236,72,153,.18);
+      --radius:     16px;
+      --font:       'Nunito', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--cream);
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* ── Floating Hearts ── */
+    .hearts-bg {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+    }
+    .heart {
+      position: absolute; font-size: 20px; opacity: 0.12;
+      animation: floatHeart linear infinite;
+    }
+    @keyframes floatHeart {
+      0%   { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10%  { opacity: 0.12; }
+      90%  { opacity: 0.12; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* ── Topbar ── */
+    .topbar {
+      background: var(--pink-dark);
+      color: var(--white);
+      font-size: 13px;
+      text-align: center;
+      padding: 6px 16px;
+      letter-spacing: .3px;
+    }
+    .topbar a { color: #fde8f4; text-decoration: none; }
+
+    /* ── Navbar ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,.96);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 2px 16px rgba(236,72,153,.12);
+      padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 68px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px; text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 46px; height: 46px; border-radius: 50%;
+      background: linear-gradient(135deg,#f9a8d4,#ec4899);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; box-shadow: 0 2px 10px rgba(236,72,153,.35);
+    }
+    .nav-logo-text { line-height: 1.1; }
+    .nav-logo-text strong {
+      font-size: 17px; font-weight: 900;
+      background: linear-gradient(135deg,#ec4899,#be185d);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .nav-logo-text span { font-size: 11px; color: var(--pink-deep); font-weight: 600; }
+
+    .nav-links { display: flex; gap: 4px; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: #444; font-weight: 700; font-size: 14px;
+      padding: 7px 14px; border-radius: 30px; transition: all .2s;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      background: var(--pink-light); color: var(--pink-dark);
+    }
+
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
+    .btn-icon {
+      background: none; border: none; cursor: pointer;
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; transition: background .2s; position: relative;
+    }
+    .btn-icon:hover { background: var(--pink-light); }
+    .cart-count {
+      position: absolute; top: 2px; right: 2px;
+      background: var(--pink-dark); color: #fff;
+      width: 18px; height: 18px; border-radius: 50%;
+      font-size: 10px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .btn-search-bar {
+      display: flex; align-items: center;
+      background: var(--pink-light); border-radius: 30px;
+      padding: 6px 14px; gap: 6px;
+    }
+    .btn-search-bar input {
+      border: none; background: none; outline: none;
+      font-family: var(--font); font-size: 13px; width: 160px;
+    }
+    .btn-search-bar span { color: var(--pink-deep); }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative; overflow: hidden;
+      background: linear-gradient(135deg, #fce7f3 0%, #fdf2f8 40%, #ffe4f0 100%);
+      min-height: 520px;
+      display: flex; align-items: center;
+      padding: 60px 5%;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(244,114,182,.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 520px; }
+    .hero-badge {
+      display: inline-block;
+      background: linear-gradient(135deg,#fde68a,#fbbf24);
+      color: #92400e; font-size: 12px; font-weight: 800;
+      padding: 4px 14px; border-radius: 20px; margin-bottom: 16px;
+      letter-spacing: .5px; text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 56px); font-weight: 900;
+      line-height: 1.1; margin-bottom: 10px;
+      background: linear-gradient(135deg,#ec4899 0%,#be185d 50%,#7c3f2c 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero-sub {
+      font-size: 18px; color: var(--brown); font-weight: 700; margin-bottom: 8px;
+    }
+    .hero-tagline {
+      font-size: 14px; color: var(--gray); margin-bottom: 28px;
+    }
+    .hero-features {
+      display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px;
+    }
+    .feat-chip {
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,.8); border: 1.5px solid #fbcfe8;
+      border-radius: 30px; padding: 6px 14px; font-size: 13px; font-weight: 700;
+      color: var(--pink-dark);
+    }
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary {
+      background: linear-gradient(135deg,#ec4899,#be185d);
+      color: #fff; border: none; border-radius: 30px;
+      padding: 13px 28px; font-family: var(--font);
+      font-size: 15px; font-weight: 800; cursor: pointer;
+      box-shadow: 0 4px 18px rgba(236,72,153,.45);
+      transition: transform .15s, box-shadow .15s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(236,72,153,.5); }
+    .btn-outline {
+      background: #fff; border: 2px solid var(--pink-deep);
+      color: var(--pink-dark); border-radius: 30px;
+      padding: 11px 26px; font-family: var(--font);
+      font-size: 15px; font-weight: 800; cursor: pointer;
+      transition: all .15s; text-decoration: none; display: inline-block;
+    }
+    .btn-outline:hover { background: var(--pink-light); }
+
+    .hero-image {
+      position: absolute; right: 0; bottom: 0; height: 100%; width: 50%;
+      display: flex; align-items: flex-end; justify-content: flex-end;
+      overflow: hidden;
+    }
+    .hero-image img {
+      height: 480px; object-fit: contain;
+      filter: drop-shadow(0 20px 40px rgba(236,72,153,.2));
+      animation: floatAnim 3s ease-in-out infinite;
+    }
+    @keyframes floatAnim {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-12px); }
+    }
+    .hero-emoji-decor {
+      position: absolute; font-size: 40px; opacity: .25; animation: floatAnim 4s ease-in-out infinite;
+    }
+
+    /* ── Stats Bar ── */
+    .stats-bar {
+      background: linear-gradient(135deg,#ec4899,#be185d);
+      color: #fff; padding: 20px 5%;
+      display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat-num { font-size: 24px; font-weight: 900; line-height: 1; }
+    .stat-label { font-size: 12px; opacity: .85; font-weight: 600; margin-top: 2px; }
+
+    /* ── Section Title ── */
+    .section { padding: 60px 5%; }
+    .section-title {
+      text-align: center; margin-bottom: 40px;
+    }
+    .section-title h2 {
+      font-size: 30px; font-weight: 900;
+      background: linear-gradient(135deg,#ec4899,#be185d);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 6px;
+    }
+    .section-title p { color: var(--gray); font-size: 14px; font-weight: 600; }
+    .title-line {
+      width: 60px; height: 4px; border-radius: 2px;
+      background: linear-gradient(135deg,#f9a8d4,#ec4899);
+      margin: 10px auto 0;
+    }
+
+    /* ── Category Pills ── */
+    .cats {
+      display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+    .cat-pill {
+      background: #fff; border: 2px solid #fbcfe8;
+      color: var(--pink-dark); border-radius: 30px;
+      padding: 8px 20px; font-family: var(--font);
+      font-size: 13px; font-weight: 700; cursor: pointer;
+      transition: all .2s;
+    }
+    .cat-pill.active, .cat-pill:hover {
+      background: linear-gradient(135deg,#ec4899,#be185d);
+      color: #fff; border-color: transparent;
+    }
+
+    /* ── Product Grid ── */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 22px;
+    }
+    .product-card {
+      background: #fff; border-radius: var(--radius);
+      box-shadow: var(--shadow); overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
+      cursor: pointer; position: relative;
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(236,72,153,.25);
+    }
+    .product-badge {
+      position: absolute; top: 12px; left: 12px; z-index: 2;
+      background: linear-gradient(135deg,#fbbf24,#f59e0b);
+      color: #fff; font-size: 10px; font-weight: 800;
+      padding: 3px 9px; border-radius: 20px; text-transform: uppercase;
+      letter-spacing: .4px;
+    }
+    .product-badge.new { background: linear-gradient(135deg,#34d399,#10b981); }
+    .product-badge.hot { background: linear-gradient(135deg,#f87171,#ef4444); }
+    .product-img-wrap {
+      position: relative; overflow: hidden;
+      height: 200px; background: var(--pink-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 72px;
+    }
+    .product-img-wrap img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .3s;
+    }
+    .product-card:hover .product-img-wrap img { transform: scale(1.07); }
+    .product-emoji { font-size: 72px; line-height: 1; }
+    .product-wishlist {
+      position: absolute; top: 10px; right: 10px;
+      background: rgba(255,255,255,.9); border: none;
+      width: 34px; height: 34px; border-radius: 50%;
+      font-size: 16px; cursor: pointer; display: flex;
+      align-items: center; justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,.1);
+      transition: transform .2s;
+    }
+    .product-wishlist:hover { transform: scale(1.2); }
+    .product-info { padding: 14px 16px 16px; }
+    .product-name {
+      font-size: 14px; font-weight: 800; color: #333;
+      margin-bottom: 4px; line-height: 1.3;
+    }
+    .product-desc { font-size: 12px; color: var(--gray); margin-bottom: 10px; line-height: 1.4; }
+    .product-rating { font-size: 12px; margin-bottom: 8px; color: #f59e0b; }
+    .product-price-row {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .price-current {
+      font-size: 18px; font-weight: 900;
+      background: linear-gradient(135deg,#ec4899,#be185d);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .price-old {
+      font-size: 12px; color: #aaa; text-decoration: line-through; margin-left: 6px;
+    }
+    .btn-add-cart {
+      background: linear-gradient(135deg,#f9a8d4,#ec4899);
+      border: none; border-radius: 20px;
+      padding: 7px 14px; color: #fff;
+      font-family: var(--font); font-size: 12px; font-weight: 800;
+      cursor: pointer; transition: all .2s;
+    }
+    .btn-add-cart:hover { background: linear-gradient(135deg,#ec4899,#be185d); }
+
+    /* ── Features / Why Us ── */
+    .features-section {
+      background: linear-gradient(135deg, #fff0f6, #fce7f3);
+      padding: 60px 5%;
+    }
+    .features-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+      gap: 24px; max-width: 900px; margin: 0 auto;
+    }
+    .feature-card {
+      background: #fff; border-radius: var(--radius);
+      padding: 28px 20px; text-align: center;
+      box-shadow: 0 4px 20px rgba(236,72,153,.1);
+      transition: transform .2s;
+    }
+    .feature-card:hover { transform: translateY(-4px); }
+    .feature-icon { font-size: 42px; margin-bottom: 12px; }
+    .feature-card h3 { font-size: 15px; font-weight: 800; color: var(--pink-dark); margin-bottom: 6px; }
+    .feature-card p { font-size: 13px; color: var(--gray); line-height: 1.5; }
+
+    /* ── Testimonials ── */
+    .testimonials-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+      gap: 20px;
+    }
+    .review-card {
+      background: #fff; border-radius: var(--radius);
+      padding: 22px; box-shadow: var(--shadow);
+    }
+    .review-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .review-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg,#f9a8d4,#ec4899);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; font-weight: 800; color: #fff;
+    }
+    .review-name { font-weight: 800; font-size: 14px; color: #333; }
+    .review-date { font-size: 11px; color: #aaa; }
+    .review-stars { color: #f59e0b; margin-bottom: 8px; }
+    .review-text { font-size: 13px; color: #555; line-height: 1.6; }
+    .review-product { font-size: 11px; color: var(--pink-deep); font-weight: 700; margin-top: 8px; }
+
+    /* ── Cart Sidebar ── */
+    .cart-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,.4);
+      z-index: 200; opacity: 0; visibility: hidden; transition: all .25s;
+    }
+    .cart-overlay.open { opacity: 1; visibility: visible; }
+    .cart-sidebar {
+      position: fixed; top: 0; right: -420px; bottom: 0;
+      width: 380px; max-width: 95vw;
+      background: #fff; z-index: 201;
+      box-shadow: -4px 0 30px rgba(0,0,0,.15);
+      transition: right .3s cubic-bezier(.4,0,.2,1);
+      display: flex; flex-direction: column;
+    }
+    .cart-sidebar.open { right: 0; }
+    .cart-header {
+      background: linear-gradient(135deg,#ec4899,#be185d);
+      color: #fff; padding: 18px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .cart-header h3 { font-size: 18px; font-weight: 900; }
+    .cart-close { background: none; border: none; color: #fff; font-size: 22px; cursor: pointer; }
+    .cart-body { flex: 1; overflow-y: auto; padding: 16px; }
+    .cart-empty { text-align: center; padding: 60px 20px; }
+    .cart-empty-icon { font-size: 60px; margin-bottom: 16px; }
+    .cart-empty p { color: var(--gray); font-weight: 600; }
+    .cart-item {
+      display: flex; gap: 12px; padding: 12px 0;
+      border-bottom: 1px solid #f3f4f6; align-items: center;
+    }
+    .cart-item-img {
+      width: 60px; height: 60px; border-radius: 10px;
+      background: var(--pink-light); display: flex; align-items: center;
+      justify-content: center; font-size: 28px; flex-shrink: 0;
+    }
+    .cart-item-info { flex: 1; }
+    .cart-item-name { font-size: 13px; font-weight: 800; color: #333; margin-bottom: 4px; }
+    .cart-item-price { font-size: 13px; font-weight: 700; color: var(--pink-dark); }
+    .cart-qty {
+      display: flex; align-items: center; gap: 8px; margin-top: 6px;
+    }
+    .qty-btn {
+      background: var(--pink-light); border: none; border-radius: 50%;
+      width: 24px; height: 24px; font-size: 14px; font-weight: 800;
+      color: var(--pink-dark); cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+    .qty-num { font-size: 13px; font-weight: 700; min-width: 20px; text-align: center; }
+    .cart-remove { background: none; border: none; color: #ccc; cursor: pointer; font-size: 18px; }
+    .cart-remove:hover { color: #ef4444; }
+    .cart-footer {
+      padding: 16px 20px;
+      border-top: 1px solid #f3f4f6;
+      background: #fafafa;
+    }
+    .cart-total {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 16px; font-weight: 900; margin-bottom: 14px;
+    }
+    .cart-total-price { color: var(--pink-dark); }
+    .btn-checkout {
+      width: 100%; background: linear-gradient(135deg,#ec4899,#be185d);
+      color: #fff; border: none; border-radius: 30px;
+      padding: 14px; font-family: var(--font);
+      font-size: 16px; font-weight: 900; cursor: pointer;
+      box-shadow: 0 4px 18px rgba(236,72,153,.4);
+      transition: transform .15s;
+    }
+    .btn-checkout:hover { transform: scale(1.02); }
+
+    /* ── Modal ── */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,.5);
+      z-index: 300; opacity: 0; visibility: hidden; transition: all .25s;
+      display: flex; align-items: center; justify-content: center; padding: 20px;
+    }
+    .modal-overlay.open { opacity: 1; visibility: visible; }
+    .modal {
+      background: #fff; border-radius: 20px;
+      max-width: 560px; width: 100%;
+      box-shadow: 0 20px 60px rgba(0,0,0,.25);
+      overflow: hidden; transform: scale(.9);
+      transition: transform .25s;
+    }
+    .modal-overlay.open .modal { transform: scale(1); }
+    .modal-img {
+      height: 220px; background: var(--pink-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 100px; position: relative;
+    }
+    .modal-close {
+      position: absolute; top: 12px; right: 12px;
+      background: rgba(255,255,255,.9); border: none;
+      width: 34px; height: 34px; border-radius: 50%;
+      font-size: 18px; cursor: pointer;
+    }
+    .modal-body { padding: 22px 24px 28px; }
+    .modal-name { font-size: 20px; font-weight: 900; color: #333; margin-bottom: 6px; }
+    .modal-desc { font-size: 14px; color: var(--gray); line-height: 1.6; margin-bottom: 16px; }
+    .modal-price { font-size: 26px; font-weight: 900; color: var(--pink-dark); margin-bottom: 16px; }
+    .modal-sizes { margin-bottom: 16px; }
+    .modal-sizes label { font-size: 13px; font-weight: 800; color: #444; margin-bottom: 8px; display: block; }
+    .size-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+    .size-pill {
+      border: 2px solid #fbcfe8; border-radius: 20px;
+      padding: 5px 14px; font-size: 12px; font-weight: 700;
+      color: var(--pink-dark); cursor: pointer; transition: all .2s;
+      background: none; font-family: var(--font);
+    }
+    .size-pill.active, .size-pill:hover {
+      background: var(--pink-deep); color: #fff; border-color: var(--pink-deep);
+    }
+    .modal-actions { display: flex; gap: 12px; }
+    .modal-actions .btn-primary { flex: 1; text-align: center; }
+
+    /* ── Contact / Footer ── */
+    .contact-section {
+      background: linear-gradient(135deg,#1f0a10,#3b0d1e);
+      color: #fff; padding: 60px 5% 30px;
+    }
+    .contact-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+      gap: 40px; margin-bottom: 40px;
+    }
+    .contact-brand h3 {
+      font-size: 24px; font-weight: 900; margin-bottom: 8px;
+      background: linear-gradient(135deg,#f9a8d4,#ec4899);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .contact-brand p { font-size: 13px; color: rgba(255,255,255,.65); line-height: 1.7; }
+    .contact-col h4 { font-size: 14px; font-weight: 800; margin-bottom: 14px; color: #f9a8d4; }
+    .contact-col ul { list-style: none; }
+    .contact-col ul li { margin-bottom: 8px; }
+    .contact-col ul li a {
+      color: rgba(255,255,255,.65); text-decoration: none; font-size: 13px;
+      transition: color .2s;
+    }
+    .contact-col ul li a:hover { color: var(--pink); }
+    .contact-info-item {
+      display: flex; align-items: flex-start; gap: 8px;
+      margin-bottom: 10px; font-size: 13px; color: rgba(255,255,255,.75);
+    }
+    .contact-info-item span:first-child { font-size: 16px; margin-top: 1px; flex-shrink: 0; }
+    .social-links { display: flex; gap: 10px; margin-top: 16px; }
+    .social-btn {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: rgba(255,255,255,.12); display: flex;
+      align-items: center; justify-content: center;
+      font-size: 18px; text-decoration: none;
+      transition: background .2s; color: #fff;
+    }
+    .social-btn:hover { background: var(--pink-deep); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.1);
+      padding-top: 20px; text-align: center;
+      font-size: 12px; color: rgba(255,255,255,.4);
+    }
+
+    /* ── Toast ── */
+    .toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
+      background: linear-gradient(135deg,#ec4899,#be185d);
+      color: #fff; padding: 12px 24px; border-radius: 30px;
+      font-size: 14px; font-weight: 700;
+      box-shadow: 0 4px 20px rgba(236,72,153,.4);
+      z-index: 500; transition: transform .3s;
+      white-space: nowrap;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .hero { flex-direction: column; min-height: auto; padding: 40px 5% 220px; }
+      .hero-image { width: 100%; justify-content: center; top: auto; bottom: -10px; height: 200px; position: absolute; }
+      .hero-image img { height: 200px; }
+      .nav-links { display: none; }
+      .btn-search-bar input { width: 100px; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .stats-bar { gap: 20px; }
+      .cart-sidebar { width: 95vw; }
+    }
+    @media (max-width: 480px) {
+      .products-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .hero-btns { flex-direction: column; }
+      .modal-actions { flex-direction: column; }
+    }
+
+    /* Banner image section */
+    .banner-section {
+      padding: 0; margin: 0; line-height: 0;
+    }
+    .banner-section img {
+      width: 100%; display: block;
+      max-height: 280px; object-fit: cover; object-position: center;
+    }
+
+    /* Promo banner */
+    .promo-banner {
+      background: linear-gradient(135deg,#fde68a,#fbbf24);
+      text-align: center; padding: 14px;
+      font-size: 15px; font-weight: 800; color: #92400e;
+    }
+    .promo-banner span { text-decoration: underline; cursor: pointer; }
+
+    /* Scroll to top */
+    #scrollTop {
+      position: fixed; bottom: 24px; right: 24px;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg,#ec4899,#be185d);
+      color: #fff; border: none; font-size: 20px;
+      cursor: pointer; box-shadow: 0 4px 16px rgba(236,72,153,.4);
+      display: none; align-items: center; justify-content: center;
+      z-index: 50; transition: transform .2s;
+    }
+    #scrollTop:hover { transform: scale(1.1); }
+    #scrollTop.visible { display: flex; }
+  </style>
+</head>
+<body>
+
+<!-- Floating hearts decoration -->
+<div class="hearts-bg" id="heartsBg"></div>
+
+<!-- Topbar -->
+<div class="topbar">
+  🎁 Miễn phí vận chuyển đơn từ 300.000đ &nbsp;|&nbsp; Hotline: <a href="tel:0931622717">093 162 27 17</a> &nbsp;|&nbsp; 📍 69/2/35 Nguyễn Gia Trí, Bình Thạnh, TP.HCM
+</div>
+
+<!-- Navbar -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">🐻</div>
+    <div class="nav-logo-text">
+      <strong>Shop Bít Tút</strong><br>
+      <span>Thú Nhồi Bông</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#" class="active">Trang Chủ</a></li>
+    <li><a href="#products">Sản Phẩm</a></li>
+    <li><a href="#features">Về Chúng Tôi</a></li>
+    <li><a href="#reviews">Đánh Giá</a></li>
+    <li><a href="#contact">Liên Hệ</a></li>
+  </ul>
+  <div class="nav-actions">
+    <div class="btn-search-bar">
+      <span>🔍</span>
+      <input type="text" id="searchInput" placeholder="Tìm thú nhồi bông..." oninput="filterProducts()" />
+    </div>
+    <button class="btn-icon" onclick="toggleCart()" title="Giỏ hàng">
+      🛒
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- Promo Banner -->
+<div class="promo-banner">
+  💖 SALE 20% tất cả gấu bông dịp 20/10 – Nhập code: <span>BITTUT20</span> khi thanh toán!
+</div>
+
+<!-- Hero Section -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-badge">🌟 Thú Nhồi Bông Cao Cấp</div>
+    <h1>Shop Bít Tút</h1>
+    <div class="hero-sub">❤️ Thú Nhồi Bông Dễ Thương</div>
+    <p class="hero-tagline">Mềm mại – Dễ thương – Trao yêu thương</p>
+    <div class="hero-features">
+      <div class="feat-chip">✅ 100% chính hãng</div>
+      <div class="feat-chip">⭐ Chất lượng cao cấp</div>
+      <div class="feat-chip">🚚 Giao hàng nhanh</div>
+      <div class="feat-chip">🎁 Quà tặng ý nghĩa</div>
+    </div>
+    <div class="hero-btns">
+      <a href="#products" class="btn-primary">🛍️ Mua Ngay</a>
+      <a href="https://shopee.vn/shop/81483099" target="_blank" class="btn-outline">🛒 Shopee</a>
+    </div>
+  </div>
+  <div class="hero-image">
+    <!-- Replace with your actual hero image if available -->
+    <div style="font-size:160px; opacity:.6; animation: floatAnim 3s ease-in-out infinite;">🐻</div>
+  </div>
+</section>
+
+<!-- Stats Bar -->
+<div class="stats-bar">
+  <div class="stat"><div class="stat-num">500+</div><div class="stat-label">Khách Hàng Vui</div></div>
+  <div class="stat"><div class="stat-num">50+</div><div class="stat-label">Mẫu Gấu Bông</div></div>
+  <div class="stat"><div class="stat-num">4.9⭐</div><div class="stat-label">Đánh Giá TB</div></div>
+  <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Hàng Chính Hãng</div></div>
+</div>
+
+<!-- Products Section -->
+<section class="section" id="products">
+  <div class="section-title">
+    <h2>🐾 Sản Phẩm Nổi Bật</h2>
+    <p>Tất cả thú nhồi bông đều siêu mềm, siêu dễ thương!</p>
+    <div class="title-line"></div>
+  </div>
+
+  <div class="cats" id="catFilter">
+    <button class="cat-pill active" onclick="filterCat(this,'all')">🐾 Tất Cả</button>
+    <button class="cat-pill" onclick="filterCat(this,'bear')">🐻 Gấu Bông</button>
+    <button class="cat-pill" onclick="filterCat(this,'rabbit')">🐰 Thỏ Bông</button>
+    <button class="cat-pill" onclick="filterCat(this,'animal')">🐧 Thú Khác</button>
+    <button class="cat-pill" onclick="filterCat(this,'pillow')">🛋️ Gối Ôm</button>
+  </div>
+
+  <div class="products-grid" id="productsGrid"></div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section" id="features">
+  <div class="section-title">
+    <h2>💝 Tại Sao Chọn Shop Bít Tút?</h2>
+    <p>Chúng tôi cam kết mang đến trải nghiệm mua sắm tuyệt vời nhất</p>
+    <div class="title-line"></div>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🏆</div>
+      <h3>Chất Lượng Cao Cấp</h3>
+      <p>Lông mềm mịn, sợi bông chuẩn cao cấp, không kích ứng da, an toàn cho trẻ em.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🚚</div>
+      <h3>Giao Hàng Nhanh</h3>
+      <p>Đóng gói cẩn thận, giao hàng toàn quốc trong 1–3 ngày làm việc.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💰</div>
+      <h3>Giá Hợp Lý</h3>
+      <p>Giá cạnh tranh, thường xuyên có khuyến mãi hấp dẫn cho khách hàng thân thiết.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎁</div>
+      <h3>Quà Tặng Ý Nghĩa</h3>
+      <p>Gói quà miễn phí, thiệp chúc mừng theo yêu cầu — hoàn hảo cho mọi dịp.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔄</div>
+      <h3>Đổi Trả Dễ Dàng</h3>
+      <p>Hỗ trợ đổi trả trong vòng 7 ngày nếu sản phẩm có lỗi từ nhà sản xuất.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💬</div>
+      <h3>Hỗ Trợ 24/7</h3>
+      <p>Đội ngũ tư vấn nhiệt tình, phản hồi nhanh qua Facebook & Zalo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews Section -->
+<section class="section" id="reviews">
+  <div class="section-title">
+    <h2>💬 Khách Hàng Nói Gì?</h2>
+    <p>Hơn 500 khách hàng tin tưởng và yêu thích Shop Bít Tút</p>
+    <div class="title-line"></div>
+  </div>
+  <div class="testimonials-grid">
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar">L</div>
+        <div>
+          <div class="review-name">Linh Nguyễn</div>
+          <div class="review-date">23/10/2026</div>
+        </div>
+      </div>
+      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <p class="review-text">Gấu bông siêu mềm, đóng gói rất cẩn thận. Mình mua tặng bạn thân, bạn thích lắm! Sẽ quay lại mua tiếp 💕</p>
+      <div class="review-product">🐻 Gấu Bông Lông Siêu Mềm 45CM</div>
+    </div>
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar" style="background:linear-gradient(135deg,#a78bfa,#7c3aed)">M</div>
+        <div>
+          <div class="review-name">Minh Tú</div>
+          <div class="review-date">20/10/2026</div>
+        </div>
+      </div>
+      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <p class="review-text">Shop tư vấn nhiệt tình, thỏ Jellycat y hình, lông mềm không phai màu. Giá rẻ hơn mình nghĩ nhiều 🐰</p>
+      <div class="review-product">🐰 Thỏ Jellycat</div>
+    </div>
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar" style="background:linear-gradient(135deg,#6ee7b7,#059669)">T</div>
+        <div>
+          <div class="review-name">Thu Hà</div>
+          <div class="review-date">15/10/2026</div>
+        </div>
+      </div>
+      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <p class="review-text">Capybara 6 múi nhìn quá cute! Giao hàng nhanh, ship nguyên vẹn. Shop có tặng thêm sticker xinh nữa 🥹</p>
+      <div class="review-product">🦫 Gấu Bông Capybara</div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact / Footer -->
+<section class="contact-section" id="contact">
+  <div class="contact-grid">
+    <div class="contact-brand">
+      <h3>🐻 Shop Bít Tút</h3>
+      <p>Thú nhồi bông chất lượng cao cấp — Mềm mại, dễ thương, trao yêu thương. Mang niềm vui đến cho mọi người!</p>
+      <div class="social-links">
+        <a href="https://www.facebook.com/profile.php?id=61596081653012" target="_blank" class="social-btn" title="Facebook">📘</a>
+        <a href="https://shopee.vn/shop/81483099" target="_blank" class="social-btn" title="Shopee">🛒</a>
+        <a href="https://www.tiktok.com/@shopbittut" target="_blank" class="social-btn" title="TikTok">🎵</a>
+        <a href="tel:0931622717" class="social-btn" title="Gọi ngay">📞</a>
+      </div>
+    </div>
+    <div class="contact-col">
+      <h4>Danh Mục</h4>
+      <ul>
+        <li><a href="#products">🐻 Gấu Bông</a></li>
+        <li><a href="#products">🐰 Thỏ Bông</a></li>
+        <li><a href="#products">🐧 Thú Nhồi Bông</a></li>
+        <li><a href="#products">🛋️ Gối Ôm</a></li>
+        <li><a href="#products">🎁 Quà Tặng</a></li>
+      </ul>
+    </div>
+    <div class="contact-col">
+      <h4>Hỗ Trợ</h4>
+      <ul>
+        <li><a href="#">Chính Sách Đổi Trả</a></li>
+        <li><a href="#">Hướng Dẫn Đặt Hàng</a></li>
+        <li><a href="#">Phương Thức Thanh Toán</a></li>
+        <li><a href="#">Theo Dõi Đơn Hàng</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="contact-col">
+      <h4>Liên Hệ</h4>
+      <div class="contact-info-item">
+        <span>📍</span>
+        <span>69/2/35 Nguyễn Gia Trí, Bình Thạnh, TP. Hồ Chí Minh, 72331</span>
+      </div>
+      <div class="contact-info-item">
+        <span>📞</span>
+        <span><a href="tel:0931622717" style="color:rgba(255,255,255,.75);text-decoration:none">093 162 27 17</a></span>
+      </div>
+      <div class="contact-info-item">
+        <span>📘</span>
+        <span><a href="https://www.facebook.com/profile.php?id=61596081653012" target="_blank" style="color:rgba(255,255,255,.75);text-decoration:none">Shop Bit Tút</a></span>
+      </div>
+      <div class="contact-info-item">
+        <span>🎵</span>
+        <span>@shopbittut</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Shop Bít Tút – Thú Nhồi Bông. All rights reserved. 💖 Made with love.</p>
+  </div>
+</section>
+
+<!-- Cart Sidebar -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h3>🛒 Giỏ Hàng</h3>
+    <button class="cart-close" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-body" id="cartBody">
+    <div class="cart-empty">
+      <div class="cart-empty-icon">🛒</div>
+      <p>Giỏ hàng của bạn đang trống<br>Hãy thêm vài chú thú dễ thương nhé! 🐻</p>
+    </div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-total">
+      <span>Tổng cộng:</span>
+      <span class="cart-total-price" id="cartTotal">0đ</span>
+    </div>
+    <button class="btn-checkout" onclick="checkout()">💳 Thanh Toán Ngay</button>
+  </div>
+</div>
+
+<!-- Product Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="productModal">
+    <div class="modal-img" id="modalImg">
+      <button class="modal-close" onclick="closeModalBtn()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-name" id="modalName"></div>
+      <div class="modal-desc" id="modalDesc"></div>
+      <div class="modal-price" id="modalPrice"></div>
+      <div class="modal-sizes">
+        <label>Chọn kích thước:</label>
+        <div class="size-pills" id="modalSizes"></div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-primary" onclick="addFromModal()">🛒 Thêm vào giỏ</button>
+        <button class="btn-outline" onclick="closeModalBtn()">Đóng</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Scroll to top -->
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+  // ── Data ──
+  const PRODUCTS = [
+    {
+      id: 1, emoji: '🦆', name: 'Thú Nhồi Bông Ngỗng Trắng', cat: 'animal',
+      desc: 'Ngỗng trắng siêu mềm, gối ôm gấu bông vịt trắng cute – món quà ngọt ngào cho người thân yêu.',
+      price: 125000, oldPrice: 155000, badge: 'hot',
+      sizes: ['25cm', '35cm', '45cm', '60cm'],
+      rating: 4.8, sold: 128,
+      shopeeLink: 'https://shopee.vn/shop/81483099'
+    },
+    {
+      id: 2, emoji: '🐰', name: 'Thỏ Jellycat Siêu Mềm', cat: 'rabbit',
+      desc: 'Thỏ Jellycat lông siêu mịn, tai dài dễ thương – món quà lý tưởng ngày Valentine, sinh nhật.',
+      price: 140000, oldPrice: 175000, badge: 'new',
+      sizes: ['20cm', '30cm', '45cm'],
+      rating: 4.9, sold: 95,
+      shopeeLink: 'https://shopee.vn/shop/81483099'
+    },
+    {
+      id: 3, emoji: '🐷', name: 'Gấu Bông Heo Ôm Chuối', cat: 'animal',
+      desc: 'Heo hồng ôm chuối siêu cute, mặt tròn nụ cười hồng – không thể không yêu!',
+      price: 180000, oldPrice: 220000, badge: 'hot',
+      sizes: ['30cm', '40cm', '55cm'],
+      rating: 4.8, sold: 72,
+      shopeeLink: 'https://shopee.vn/shop/81483099'
+    },
+    {
+      id: 4, emoji: '🐻', name: 'Gấu Bông Lông Siêu Mềm 45CM', cat: 'bear',
+      desc: 'Gấu nâu lông siêu mềm cao cấp 45cm, ôm ấp cực kỳ thoải mái, thích hợp trang trí phòng.',
+      price: 275000, oldPrice: 340000, badge: '',
+      sizes: ['35cm', '45cm', '60cm', '80cm'],
+      rating: 5.0, sold: 203,
+      shopeeLink: 'https://shopee.vn/shop/81483099'
+    },
+    {
+      id: 5, emoji: '🦫', name: 'Gấu Bông Capybara 6 Múi Vô Tri', cat: 'animal',
+      desc: 'Capybara cơ bắp 6 múi – bộ sưu tập độc đáo siêu viral, biểu cảm vô tri cực vui nhộn!',
+      price: 380000, oldPrice: 450000, badge: 'hot',
+      sizes: ['30cm', '45cm'],
+      rating: 4.9, sold: 156,
+      shopeeLink: 'https://shopee.vn/shop/81483099'
+    },
+    {
+      id: 6, emoji: '🐔', name: 'Gối Tựa Lưng Hình Gà Con', cat: 'pillow',
+      desc: 'Gối tựa lưng mềm mại hình gà con dễ thương – vừa ôm vừa dùng tựa lưng, đa năng cực kỳ!',
+      price: 170000, oldPrice: 210000, badge: 'new',
+      sizes: ['35cm', '50cm'],
+      rating: 4.7, sold: 89,
+      shopeeLink: 'https://shopee.vn/shop/81483099'
+    },
+    {
+      id: 7, emoji: '🐻‍❄️', name: 'Gấu Bắc Cực Trắng Tinh', cat: 'bear',
+      desc: 'Gấu bắc cực trắng tuyết, lông mềm như mây – đặc biệt thích hợp tặng quà cho người yêu.',
+      price: 220000, oldPrice: 270000, badge: 'new',
+      sizes: ['30cm', '45cm', '60cm'],
+      rating: 4.8, sold: 61,
+      shopeeLink: 'https://shopee.vn/shop/81483099'
+    },
+    {
+      id: 8, emoji: '🐧', name: 'Chim Cánh Cụt Nhồi Bông', cat: 'animal',
+      desc: 'Chim cánh cụt đen trắng đáng yêu, bụng trắng tròn mịn – trẻ em cực thích!',
+      price: 150000, oldPrice: 185000, badge: '',
+      sizes: ['25cm', '35cm', '50cm'],
+      rating: 4.8, sold: 44,
+      shopeeLink: 'https://shopee.vn/shop/81483099'
+    }
+  ];
+
+  // ── Cart State ──
+  let cart = JSON.parse(localStorage.getItem('bittut_cart') || '[]');
+  let currentProduct = null;
+  let selectedSize = '';
+  let currentCat = 'all';
+  let searchQuery = '';
+
+  // ── Helpers ──
+  function fmtPrice(n) {
+    return n.toLocaleString('vi-VN') + 'đ';
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2200);
+  }
+
+  function saveCart() {
+    localStorage.setItem('bittut_cart', JSON.stringify(cart));
+  }
+
+  // ── Render Products ──
+  function renderProducts() {
+    const grid = document.getElementById('productsGrid');
+    const q = searchQuery.toLowerCase();
+    const items = PRODUCTS.filter(p => {
+      const matchCat = currentCat === 'all' || p.cat === currentCat;
+      const matchQ = q === '' || p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q);
+      return matchCat && matchQ;
+    });
+
+    if (items.length === 0) {
+      grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--gray)">
+        <div style="font-size:60px">🔍</div>
+        <p style="font-weight:700;margin-top:12px">Không tìm thấy sản phẩm phù hợp</p>
+      </div>`;
+      return;
+    }
+
+    grid.innerHTML = items.map(p => `
+      <div class="product-card" onclick="openModal(${p.id})">
+        ${p.badge ? `<div class="product-badge ${p.badge === 'new' ? 'new' : p.badge === 'hot' ? 'hot' : ''}">${p.badge === 'new' ? '🆕 Mới' : '🔥 Hot'}</div>` : ''}
+        <div class="product-img-wrap">
+          <div class="product-emoji">${p.emoji}</div>
+          <button class="product-wishlist" onclick="wishlist(event,${p.id})" title="Yêu thích">🤍</button>
+        </div>
+        <div class="product-info">
+          <div class="product-name">${p.name}</div>
+          <div class="product-desc">${p.desc.substring(0,65)}...</div>
+          <div class="product-rating">
+            ${'⭐'.repeat(Math.floor(p.rating))} ${p.rating} &nbsp;<span style="color:#aaa;font-size:11px">(${p.sold} đã bán)</span>
+          </div>
+          <div class="product-price-row">
+            <div>
+              <span class="price-current">${fmtPrice(p.price)}</span>
+              <span class="price-old">${fmtPrice(p.oldPrice)}</span>
+            </div>
+            <button class="btn-add-cart" onclick="quickAdd(event,${p.id})">+ Giỏ</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function filterCat(el, cat) {
+    currentCat = cat;
+    document.querySelectorAll('.cat-pill').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+    renderProducts();
+  }
+
+  function filterProducts() {
+    searchQuery = document.getElementById('searchInput').value;
+    renderProducts();
+  }
+
+  // ── Modal ──
+  function openModal(id) {
+    const p = PRODUCTS.find(x => x.id === id);
+    currentProduct = p;
+    selectedSize = p.sizes[0];
+    document.getElementById('modalImg').innerHTML = `
+      <div style="font-size:110px">${p.emoji}</div>
+      <button class="modal-close" onclick="closeModalBtn()">✕</button>
+    `;
+    document.getElementById('modalName').textContent = p.name;
+    document.getElementById('modalDesc').textContent = p.desc;
+    document.getElementById('modalPrice').innerHTML = `${fmtPrice(p.price)} <span style="font-size:14px;font-weight:400;color:#aaa;text-decoration:line-through">${fmtPrice(p.oldPrice)}</span>`;
+    document.getElementById('modalSizes').innerHTML = p.sizes.map((s,i) =>
+      `<button class="size-pill ${i===0?'active':''}" onclick="selectSize(this,'${s}')">${s}</button>`
+    ).join('');
+    document.getElementById('modalOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function selectSize(el, size) {
+    selectedSize = size;
+    document.querySelectorAll('.size-pill').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  function closeModal(e) {
+    if (e.target === document.getElementById('modalOverlay')) closeModalBtn();
+  }
+  function closeModalBtn() {
+    document.getElementById('modalOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function addFromModal() {
+    if (!currentProduct) return;
+    addToCart(currentProduct, selectedSize);
+    closeModalBtn();
+  }
+
+  // ── Cart ──
+  function addToCart(p, size) {
+    const key = `${p.id}-${size}`;
+    const existing = cart.find(i => i.key === key);
+    if (existing) {
+      existing.qty++;
+    } else {
+      cart.push({ key, id: p.id, name: p.name, emoji: p.emoji, price: p.price, size, qty: 1 });
+    }
+    saveCart();
+    updateCartUI();
+    showToast(`✅ Đã thêm "${p.name}" vào giỏ hàng!`);
+  }
+
+  function quickAdd(e, id) {
+    e.stopPropagation();
+    const p = PRODUCTS.find(x => x.id === id);
+    addToCart(p, p.sizes[0]);
+  }
+
+  function wishlist(e, id) {
+    e.stopPropagation();
+    e.currentTarget.textContent = '❤️';
+    showToast('💖 Đã thêm vào danh sách yêu thích!');
+  }
+
+  function updateCartUI() {
+    const total = cart.reduce((s, i) => s + i.qty, 0);
+    document.getElementById('cartCount').textContent = total;
+
+    const body = document.getElementById('cartBody');
+    const footer = document.getElementById('cartFooter');
+
+    if (cart.length === 0) {
+      body.innerHTML = `<div class="cart-empty"><div class="cart-empty-icon">🛒</div><p>Giỏ hàng của bạn đang trống<br>Hãy thêm vài chú thú dễ thương nhé! 🐻</p></div>`;
+      footer.style.display = 'none';
+      return;
+    }
+
+    footer.style.display = 'block';
+    const totalPrice = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    document.getElementById('cartTotal').textContent = fmtPrice(totalPrice);
+
+    body.innerHTML = cart.map((item, idx) => `
+      <div class="cart-item">
+        <div class="cart-item-img">${item.emoji}</div>
+        <div class="cart-item-info">
+          <div class="cart-item-name">${item.name}</div>
+          <div style="font-size:11px;color:#aaa;margin-bottom:2px">Size: ${item.size}</div>
+          <div class="cart-item-price">${fmtPrice(item.price)}</div>
+          <div class="cart-qty">
+            <button class="qty-btn" onclick="changeQty(${idx},-1)">−</button>
+            <span class="qty-num">${item.qty}</span>
+            <button class="qty-btn" onclick="changeQty(${idx},1)">+</button>
+          </div>
+        </div>
+        <button class="cart-remove" onclick="removeItem(${idx})">🗑️</button>
+      </div>
+    `).join('');
+  }
+
+  function changeQty(idx, delta) {
+    cart[idx].qty += delta;
+    if (cart[idx].qty <= 0) cart.splice(idx, 1);
+    saveCart();
+    updateCartUI();
+  }
+
+  function removeItem(idx) {
+    cart.splice(idx, 1);
+    saveCart();
+    updateCartUI();
+  }
+
+  function toggleCart() {
+    document.getElementById('cartOverlay').classList.toggle('open');
+    document.getElementById('cartSidebar').classList.toggle('open');
+    document.body.style.overflow = document.getElementById('cartSidebar').classList.contains('open') ? 'hidden' : '';
+  }
+
+  function checkout() {
+    showToast('🎉 Đang chuyển đến trang thanh toán...');
+    setTimeout(() => {
+      window.open('https://shopee.vn/shop/81483099', '_blank');
+    }, 1000);
+  }
+
+  // ── Floating Hearts ──
+  function initHearts() {
+    const bg = document.getElementById('heartsBg');
+    const chars = ['💕','💗','🤍','❤️','💖','🌸','✨'];
+    for (let i = 0; i < 18; i++) {
+      const h = document.createElement('div');
+      h.className = 'heart';
+      h.textContent = chars[Math.floor(Math.random() * chars.length)];
+      h.style.left = Math.random() * 100 + '%';
+      h.style.fontSize = (14 + Math.random() * 16) + 'px';
+      h.style.animationDuration = (8 + Math.random() * 14) + 's';
+      h.style.animationDelay = (Math.random() * 12) + 's';
+      bg.appendChild(h);
+    }
+  }
+
+  // ── Scroll to top ──
+  window.addEventListener('scroll', () => {
+    const btn = document.getElementById('scrollTop');
+    btn.classList.toggle('visible', window.scrollY > 400);
+  });
+
+  // ── Init ──
+  initHearts();
+  renderProducts();
+  updateCartUI();
+</script>
+</body>
+</html>
